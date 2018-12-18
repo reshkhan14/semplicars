@@ -6,6 +6,8 @@ import {createBottomTabNavigator, createAppContainer} from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import HomeTabs from './HomeTabs.js';
+import CategoryNavigate from './CategoryNavigate.js';
+import Profile from './Profile.js';
 
 class HomeScreen extends React.Component {
   render() {
@@ -17,13 +19,7 @@ class HomeScreen extends React.Component {
 class CatScreen extends React.Component {
   render() {
     return (
-        <View style={styles.home}>
-          <Text>CAT!</Text>
-          <Button
-          title="Go to Settings"
-          onPress={() => this.props.navigation.navigate('More')}
-        />
-        </View>
+        <CategoryNavigate />
       );
   }
 }
@@ -31,9 +27,9 @@ class AddScreen extends React.Component {
   render() {
     return (
         <View style={styles.home}>
-          <Text>Add!</Text>
+          <Text>POSTAD!</Text>
           <Button
-          title="Go to Home"
+          title="Login Required"
           onPress={() => this.props.navigation.navigate('Home')}
         />
         </View>
@@ -44,13 +40,7 @@ class AddScreen extends React.Component {
 class SettingsScreen extends React.Component {
   render() {
     return (
-        <View style={styles.home}>
-          <Text>More!</Text>
-          <Button
-          title="Go to Home"
-          onPress={() => this.props.navigation.navigate('Home')}
-        />
-        </View>
+        <Profile />
       );
   }
 }

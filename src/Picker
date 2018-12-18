@@ -1,37 +1,46 @@
 
 import React, {Component} from 'react';
-import {ScrollView,Platform, StyleSheet, Text, TextInput, View, ImageBackground, Button} from 'react-native';
+import {ScrollView,Platform, StyleSheet, Text, TextInput, View, ImageBackground, Button, Picker} from 'react-native';
 
 import {createStackNavigator} from 'react-navigation';
 import ImageOverlay from './ImageOverlay.js';
-import Spinner from 'react-native-spinkit';
 
 type Props = {};
 export default class Home extends Component<Props> {
   static navigationOptions = {
     title: 'Home',
   };
-  constructor(props) {
-    super(props);
-    this.state = { text: 'Username' };
-    this.state1 = { text: 'Password' };
+  constructor() {
+    super();
+    this.state = { PickerValue: '' };
+  }
+  clickMe = () => {
+    var data = this.state.PickerValue;
+    if(data==''){
+      alert('Please select a region');
+    }else{
+      alert(this.state.PickerValue); 
+    }
   }
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <ImageBackground source={require('./../images/load.jpeg')} style={styles.container}>
-      <View style={styles.heading}>
-      <ImageOverlay header="SEMPLICARS.COM" />
-      <View style={styles.spin} ><Spinner style={{}} color={'black'} size={100} type={'Circle'} /></View>
-      
-      </View>
+      <View style={styles.container} >
+        <Picker
+          selectedValue={this.state.PickerValue}
+          style={styles.pick}
+          onValueChange={(itemValue, itemIndex) => this.setState({PickerValue: itemValue})}>
+          <Picker.Item label="Select an Option" value="" />
+          <Picker.Item label="United Arab Emirates" value="uae" />
+          <Picker.Item label="India" value="ind" />
+        </Picker>
+        
       <View style={styles.inner}>
       <ScrollView contentContainerStyle={styles.contentContainer}>
-        <View style={styles.car}><Button title="CLICK TO LOGIN" color="#2f4f4f" raised={true} onPress={()=>navigate('Cars')} /></View>
+        <View style={styles.car}><Button title="ENTER" color="#2f4f4f" raised={true} onPress={this.clickMe} /></View>
       </ScrollView>
-        
       </View>
-      </ImageBackground>
+      </View>
     );
   }
 }
@@ -39,9 +48,9 @@ export default class Home extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
+    justifyContent: 'center',
     alignItems: 'center',
-    
+    backgroundColor: '#FFDEAD',
   },
   inner:  {
     width: '80%',
@@ -80,6 +89,10 @@ const styles = StyleSheet.create({
   spin: {
     marginTop:80,
     marginLeft: 80
+  },
+  pick: {
+    width: '80%',
+    borderColor: '#000'
   }
   
 });

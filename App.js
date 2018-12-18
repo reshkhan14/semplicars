@@ -11,18 +11,36 @@ import {ScrollView,Platform, StyleSheet, Text, TextInput, View, ImageBackground}
 
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 
-import Home from './src/Home'
-import Main from './src/Main'
+import Splash from './src/Splash'
+import Navigation from './src/Stack'
 import Cars from './src/Cars'
 
-const MainNavigator = createStackNavigator({
-  Home: {screen: Home},
-  Main: {screen: Main},
-  Cars: {screen: Cars},
-});
+export default class App extends Component {
+constructor(props){
+    super(props);
+    this.state = {
+        timePassed: false,
+    };
+}
 
-const Navigation = createAppContainer(MainNavigator);
+componentDidMount() {
+    setTimeout( () => {
+        this.setTimePassed();
+    },3000);
+}
 
-export default Navigation;
+setTimePassed() {
+    this.setState({timePassed: true});
+}
+
+render() {
+    if (!this.state.timePassed) {
+        return <Splash/>;
+    } else {
+        return <Cars/>;
+    }
+}
+}
+
 
 
